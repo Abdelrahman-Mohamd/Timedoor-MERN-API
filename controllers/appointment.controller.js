@@ -1,3 +1,5 @@
+// logic for handling requests. Each function corresponds to an endpoint
+
 const Appointment = require("../models/appointment.model");
 
 const getAllAppointments = async (req, res) => {

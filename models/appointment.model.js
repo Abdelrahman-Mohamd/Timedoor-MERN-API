@@ -1,3 +1,5 @@
+// define the structure and behavior of the given data (database schema)
+
 const mongoose = require("mongoose");
 
 const AppointmentSchema = mongoose.Schema({

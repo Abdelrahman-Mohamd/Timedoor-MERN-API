@@ -1,3 +1,4 @@
+// define the API endpoints and link them to the appropriate controller functions
 const express = require("express");
 const router = express.Router();
 const Appointment = require("../models/appointment.model");

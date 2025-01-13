@@ -1,31 +1,23 @@
+// main entry point to connect everything together
+
 const express = require("express");
+const connectDB = require("./config/db.config");
+const config = require("./config/env.config");
 const mongoose = require("mongoose");
 const appointmentRoute = require("./routes/appointment.route");
-
 const app = express();
 
-// middleware
+// middlewares:
+// parse incoming JSON payloads from the request body and make the parsed data available in req.body as JS objects
 app.use(express.json());
+// parse incoming URL-encoded requests from forms and make the parsed data available in req.body as JS objects
 app.use(express.urlencoded({ extended: false }));
 
-// routes
+// base route
 app.use("/timedoorSchedule", appointmentRoute);
 
-// home route
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
-});
-
-mongoose
-  .connect(
-    "mongodb+srv://abdelrahman181181:Tdd4j2SEu23EIC8C@timedoor-api.kgahw.mongodb.net/Node-API?retryWrites=true&w=majority&appName=timedoor-api"
-  )
-  .then(() => {
-    console.log("Connected to MongoDB");
-    app.listen(3000, () => {
-      console.log("listening on port 3000");
-    });
-  })
-  .catch(() => {
-    console.log("Failed to connect to MongoDB");
+connectDB().then(() => {
+  app.listen(config.port, () => {
+    console.log(`Server is running on port ${config.port}`);
   });
+});
